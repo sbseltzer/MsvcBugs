@@ -9,7 +9,6 @@ void FBugTestSpec::Define()
 {
 	Describe("NAN", [this]()
 	{
-		// Horrific reproduction of what I believe to be multiple MSVC compiler bugs (noted in the above test).
 		It("Non-compliant reproduction A", [this]()
 		{
 			FVector V = FVector{FMath::Sqrt(-1.0), FMath::Sqrt(-1.0), FMath::Sqrt(-1.0)};
@@ -28,7 +27,6 @@ void FBugTestSpec::Define()
 				UE_LOG(LogTemp, Warning, TEXT("Result: %d %f %f %f %f"), bResult, dX, dY, dZ, Tolerance);
 			}
 		});
-		// Horrific reproduction of what I believe to be multiple MSVC compiler bugs (noted in the above test).
 		It("Non-compliant reproduction B", [this]()
 		{
 			FVector V = FVector{FMath::Sqrt(-1.0), FMath::Sqrt(-1.0), FMath::Sqrt(-1.0)};
@@ -61,7 +59,6 @@ void FBugTestSpec_Unoptimized::Define()
 {
 	Describe("NAN", [this]()
 	{
-		// Horrific reproduction of what I believe to be multiple MSVC compiler bugs (noted in the above test).
 		It("Non-compliant reproduction A", [this]()
 		{
 			FVector V = FVector{FMath::Sqrt(-1.0), FMath::Sqrt(-1.0), FMath::Sqrt(-1.0)};
@@ -80,7 +77,6 @@ void FBugTestSpec_Unoptimized::Define()
 				UE_LOG(LogTemp, Warning, TEXT("Result: %d %f %f %f %f"), bResult, dX, dY, dZ, Tolerance);
 			}
 		});
-		// Horrific reproduction of what I believe to be multiple MSVC compiler bugs (noted in the above test).
 		It("Non-compliant reproduction B", [this]()
 		{
 			FVector V = FVector{FMath::Sqrt(-1.0), FMath::Sqrt(-1.0), FMath::Sqrt(-1.0)};
