@@ -1,6 +1,8 @@
 #include "Misc/AutomationTest.h"
 
-// All of the following tests should succeed.
+// The following tests pertain to NAN comparisons that illustrate the logic of FVector::Equals in different ways.
+// On compliant compilers such as Clang, comparisons like NANVector.Equals(NANVector, Tolerance) should always be false.
+// On Windows the result depends upon code structure and optimization settings, which is demonstrated below.
 
 BEGIN_DEFINE_SPEC(FBugTestSpec, "Bugs.Optimized", EAutomationTestFlags::ProductFilter | EAutomationTestFlags_ApplicationContextMask)
 END_DEFINE_SPEC(FBugTestSpec)
@@ -47,6 +49,11 @@ void FBugTestSpec::Define()
 				bool bResult = TestFalse("InvalidVector != InvalidVector", bToleratesX && bToleratesY && bToleratesZ);
 				UE_LOG(LogTemp, Warning, TEXT("Result: %d %f %f %f %f %d %d %d"), bResult, dX, dY, dZ, Tolerance, bToleratesX, bToleratesY, bToleratesZ);
 			}
+		});
+		It("Non-compliant reproduction C", [this]()
+		{
+			FVector V = FVector{FMath::Sqrt(-1.0), FMath::Sqrt(-1.0), FMath::Sqrt(-1.0)};
+			TestFalse("InvalidVector != InvalidVector", V.Equals(V, UE_KINDA_SMALL_NUMBER));
 		});
 	});
 }
@@ -97,6 +104,11 @@ void FBugTestSpec_Unoptimized::Define()
 				bool bResult = TestFalse("InvalidVector != InvalidVector", bToleratesX && bToleratesY && bToleratesZ);
 				UE_LOG(LogTemp, Warning, TEXT("Result: %d %f %f %f %f %d %d %d"), bResult, dX, dY, dZ, Tolerance, bToleratesX, bToleratesY, bToleratesZ);
 			}
+		});
+		It("Non-compliant reproduction C", [this]()
+		{
+			FVector V = FVector{FMath::Sqrt(-1.0), FMath::Sqrt(-1.0), FMath::Sqrt(-1.0)};
+			TestFalse("InvalidVector != InvalidVector", V.Equals(V, UE_KINDA_SMALL_NUMBER));
 		});
 	});
 }
