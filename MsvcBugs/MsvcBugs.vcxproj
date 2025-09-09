@@ -122,7 +122,6 @@
 /D_DISABLE_EXTENDED_ALIGNED_STORAGE
 /Ob2
 /d2ExtendedWarningInfo
-/Ox
 /Ot
 /GF
 /errorReport:prompt
